@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1657711236 source:d:\c++\oop student\student.cpp
+	<iostream>
+
+1657712660 source:d:\c++\oop student\main.cpp
+	<iostream>
+	"student.cpp"
+
+1657711236 d:\c++\oop student\student.cpp
+	<iostream>
+

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1655053441 source:d:\c++\reverse s a string\main.cpp
+	<iostream>
+	<string.h>
+

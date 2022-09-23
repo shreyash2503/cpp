@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1658376360 source:d:\c++\spiral order matrix\main.cpp
+	<iostream>
+	<vector>
+

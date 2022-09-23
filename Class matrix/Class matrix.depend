@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1659437518 source:d:\c++\class matrix\main.cpp
+	<cmath>
+	<cstdio>
+	<vector>
+	<iostream>
+	<algorithm>
+

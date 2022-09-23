@@ -1,0 +1,192 @@
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void insertionSort(int a[],int n)
+{
+    int key;
+    for(int i=0;i<n;i++)
+    {
+        key=a[i];
+        int j=i-1;
+        while(j>=0 && a[j]>key)
+        {
+
+            a[j+1]=a[j];
+            j=j-1;
+        }
+     a[j+1]=key;
+    }
+
+}
+void mergeArray(int a[],int x[],int y[],int s,int e)
+{
+    int mid = (s+e)/2;
+    int i=s;
+    int j=mid+1;
+    int k=s;
+    while(i<=mid && j<=e)
+    {
+        if(x[i]>y[j])
+        {
+            a[k]=y[j];
+            j++;
+            k++;
+        }
+        else{
+            a[k]=x[i];
+            i++;
+            k++;
+        }
+    }
+    while(i<=mid)
+    {
+       a[k]=x[i];
+       k++;
+       i++;
+    }
+    while(j<=e)
+    {
+        a[k]=y[j];
+        j++;
+        k++;
+    }
+}
+void mergeSort(int a[],int s,int e)
+{
+    if(s>=e)
+    {
+        return;
+    }
+    int mid = (s+e)/2;
+    int x[100],y[100];
+    for(int i=0;i<=mid;i++)
+    {
+        x[i]=a[i];
+    }
+    for(int i=mid+1;i<=e;i++)
+    {
+        y[i]=a[i];
+    }
+    mergeSort(x,s,mid);
+    mergeSort(y,mid+1,e);
+    mergeArray(a,x,y,s,e);
+
+
+}
+
+int  binarySearch(int a[],int n,int key)
+{
+    int s=0;
+    int e=n-1;
+    int mid;
+    while(s<=e)
+    {
+         mid = (s+e)/2;
+        if(a[mid]==key)
+        {
+            return mid;
+        }
+        else if(a[mid]>key)
+        {
+            e=mid-1;
+        }
+        else{
+            s=mid+1;
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    int n;
+    int option;
+    int key;
+    bool t=true;
+    while(t)
+    {
+    cout<<"::Hello!::"<<endl;
+    cout<<"Choose between the following options to sort a array or search between an array::"<<endl;
+    cout<<'\n';
+    cout<<"1.Insertion Sort"<<endl;
+    cout<<'\n';
+    cout<<"2.Merge Sort"<<endl;
+    cout<<'\n';
+    cout<<"3.Binary Search"<<endl;
+    cout<<'\n';
+    cout<<"4.Back"<<endl;
+    cout<<"Please enter your option here::";
+    cin>>option;
+    if(option==1)
+    {
+        cout<<"Enter the length of array::";
+        cin>>n;
+        int a[n];
+        cout<<"Enter the array below::"<<endl;
+        for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+
+
+        }
+        insertionSort(a,n);
+        cout<<"The sorted array is::"<<endl;
+        for(int i=0;i<n;i++)
+        {
+            cout<<a[i]<<" ";
+        }
+        cout<<'\n';
+        cout<<"-----------------------------------------------------------------------------------"<<endl;
+
+    }
+    else if(option==2)
+    {
+        cout<<"Enter the length of array::";
+        cin>>n;
+        int a[n];
+        cout<<"Enter the array below::"<<endl;
+        for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+        mergeSort(a,0,n-1);
+        cout<<"The sorted array is::"<<endl;
+        for(int i=0;i<n;i++)
+        {
+
+            cout<<a[i]<<" ";
+        }
+        cout<<'\n';
+        cout<<"-----------------------------------------------------------------------------------"<<endl;
+
+    }
+    else if(option==3)
+    {
+        cout<<"Enter the length of the array::";
+        cin>>n;
+        int a[n];
+        cout<<"Enter the array below::"<<endl;
+        for(int i=0;i<n;i++)
+        {
+            cin>>a[i];
+        }
+        insertionSort(a,n);
+        cout<<"Enter the element you want to search::";
+        cin>>key;
+        cout<<"The element was found at index "<<binarySearch(a,n,key);
+        cout<<"-----------------------------------------------------------------------------------"<<endl;
+    }
+
+       else if(option==4)
+       {
+           t=false;
+           exit(0);
+           cout<<"-----------------------------------------------------------------------------------";
+       }
+
+
+
+    }
+}
