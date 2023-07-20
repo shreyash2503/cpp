@@ -36,8 +36,10 @@ int sender(int j)
 
 	else if (random < 2)
 	{
+
 		int acknowl = receiver(j);
 		return acknowl;
+
 	}
 }
 
@@ -46,7 +48,7 @@ int sender(int j)
 int main()
 {
 
-		int timer = 0;
+	int timer = 0;
 	int noOfFrames = 0;
 	printf("Enter the number of frames you want to send::");
 	scanf("%d",&noOfFrames);

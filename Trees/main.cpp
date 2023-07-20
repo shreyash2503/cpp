@@ -13,6 +13,14 @@ public:
 	{
 		this->data = data;
 	}
+
+	~TreeNode()
+	{
+		for(int i=0;i<this->children.size();i++)
+		{
+			delete this->children[i];
+		}
+	}
 };
 
 void printTree(TreeNode<int>* root)
@@ -99,6 +107,144 @@ TreeNode<int>* takeInput2()
 	return root;
 }
 
+//count the number of nodes in the tree
+
+int countNodes(TreeNode<int>* root)
+{
+    int count = 1;
+    if(root == NULL) // edge case , no need of base case as our leaf node will act as the base condition
+    {
+    	return 0;
+    }
+	
+	for(int i=0;i<root->children.size();i++)
+	{
+		count +=countNodes(root->children[i]);
+	}
+	return count;
+}
+
+int heightOfTree(TreeNode<int>* root)
+{
+	if(root == NULL)
+	{
+		return 0;
+	}
+	int mx = 0;
+	for(int i=0;i<root->children.size();i++)
+	{
+		int childHeight = heightOfTree(root->children[i]);
+		mx = max(mx,childHeight);
+	}
+	return 1+mx;
+
+}
+
+//Depth of a node:- How far a node is from the root node
+// For the root node the depth is zero while for children of the root node the value of depht is 1;
+//Print all nodes at depth d or print all the nodes at level k;
+
+void printNode(TreeNode<int>* root,int k)
+{
+	if(k == 0)
+	{
+		cout<<root->data<<" ";
+		return;
+	}
+	if(root == NULL)
+	{
+		cout<<"The tree is empty::";
+		return;
+	}
+	for(int i=0;i<root->children.size();i++)
+	{
+		printNode(root->children[i], k-1);
+
+	}
+}
+
+// count the number of leaf nodes in the given tree;
+
+int NoOfLeafNodes(TreeNode<int>* root)
+{
+	int count = 0;
+	if( root && root->children.size() == 0)
+	{
+		return 1;
+	}
+	if(root == NULL)
+	{
+		return 0;
+	}
+	for(int i=0;i<root->children.size();i++)
+	{
+		count+=NoOfLeafNodes(root->children[i]);
+	}
+	return count;
+}
+//Count the number of leaf nodes using pass by reference;
+
+void NoOfLeafNodes2(TreeNode<int>* root,int &ans)
+{
+	if(root && root->children.size())
+	{
+		ans++;
+		return;
+	}
+	for(int i=0;i<root->children.size();i++)
+	{
+		NoOfLeafNodes2(root->children[i],ans);
+	}
+}
+//PreOrder Traversal in Trees---->First print the root and then print its children
+
+void preOrderTraversal(TreeNode<int>* root)
+{
+	if(root == NULL)
+	{
+		return;
+	}
+	cout<<root->data<<" ";
+	for(int i=0;i<root->children.size();i++)
+	{
+		preOrderTraversal(root->children[i]);
+	}
+}
+
+//PostOrderTraversal in Trees--->first print the children and then the parent of the children
+
+
+void postOrderTraversal(TreeNode<int>* root)
+{
+	if(root == NULL)
+	{
+		return;
+	}
+	for(int i=0;i<root->children.size();i++)
+	{
+		postOrderTraversal(root->children[i]);
+	}
+	cout<<root->data<<" ";
+}
+
+//Deleting a tree (As we do dynamic memory allocation it is our job to free the memory we created in heap)
+//First delete children then delete root or else this will result in memory leak
+void deleteTree(TreeNode<int>* root)
+{
+	if(root == NULL)
+	{
+		return;
+	}
+	for(int i=0;i<root->children.size();i++)
+	{
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
+//Binary Trees;
+
+
+
 
 int main()
 {
@@ -128,9 +274,21 @@ int main()
 // n2->children.push_back(n22);
 TreeNode<int>* root = takeInput2();
 
-printTreeLevelWise(root);
+//printTreeLevelWise(root);
+cout<<"The number of nodes in the tree are " <<countNodes(root)<<endl;
+//Input code for printing the nodes at level k;
+//cout<<"The node present at depth 1 is ";
+//printNode(root,2);
+/////////////
+//Input code for counting the number of leaf nodes;
+//cout<<"The number of leaf nodes in the tree are "<<NoOfLeafNodes(root)<<endl;
+////////////////////////////
 
+//PreOrderTraversal Input code 
+postOrderTraversal(root);
 
+//code for deleteing a tree;
+delete root;
 
-
+return 0;
 }

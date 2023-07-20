@@ -158,42 +158,54 @@ class Stack{
 
 
 
+
+
 int main()
 {
-	
-
 	int option;
-	
 	do{
-	cout<<"1).Circular queue\n2).Reverse stack using queue\n"<<end;
-	cout<<"Choose from the above::";
-	cin>>option;
-	if(option == 1)
-	{
-	int data;
-	queue<int> q;
-	q.push(100);
-	q.push(200);
-	q.push(300);
-	q.push(400);
-	q.push(500);
-	q.pop();
-	q.pop();
-	q.push(600);
-	q.push(700);
-	int size = q.getSize();
-	for(int i=0;i<size;i++)
-	{
-		cout<<"The front element in the queue is ::"<<q.front()<<endl;
-		q.pop();
-	}
-	cout<<endl;
-	}
-	else if(option == 2)
-	{
-		int siz;
+		cout<<"\n1).Circular Queue\n2).Reverse a Stack using a queue\n3).Exit\n";
+		cout<<"Choose a option from above::";
+		cin>>option;
+		if(option == 1)
+		{
+			int size;
+			int data;
+			int siz;
+			cout<<"Enter the number of elements you want to push to queue(less than 5)";
+			cin>>size;
+			siz = size;
+			queue<int>q;
+			for(int i=0;i<size;i++)
+			{
+				cin>>data;
+				q.push(data);
+			}
+			cout<<"Enter the number of elements you want to pop::";
+			cin>>size;
+			for(int i=0;i<size;i++)
+			{
+				q.pop();
+			}
+			cout<<size<<" no. of space are empty in the queue, push "<< size<<"more elements in the queue::";
+			for(int i=0;i<size;i++)
+			{
+				cin>>data;
+				q.push(data);
+			}
+			for(int i=0;i<siz;i++)
+			{
+				cout<<q.front()<<" ";
+				q.pop();
+			}
+
+		} else if(option == 2)
+		{
+			int siz;
+			int data;
 
 	Stack<int> s;
+	queue<int> q;
 	cout<<"Enter the size of the stack::";
 	cin>>siz;
 	cout<<"Enter the elements::"<<endl;
@@ -218,19 +230,18 @@ int main()
 	}
 	for(int i=0;i<siz;i++)
 	{
-		cout<<"\nThe element present at the top of the stack is::"<<s.topElement()<<endl;
+		cout<<"\nThe element present at the"<<i<<" of the stack is::"<<s.topElement()<<endl;
 		s.pop();
 	}
 	cout<<endl;
+		}
 
-	}
-	else if(option == 3)
-	{
-		break;
-		exit(0);
-	}
-	}
-	while(1);
+		else if(option == 3)
+		{
+			break;
+			exit(0);
+		}
 
+	}while(1);
 
 }

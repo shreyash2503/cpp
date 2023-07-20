@@ -1,86 +1,93 @@
 #include <iostream>
+#inlcude <queue>
+#include <vector>
 using namespace std;
 
 template<typename T>
-class Node{
-	T data;
-	Node<T>* next;
+class TreeNode
+{
 public:
-	Node(T data)
+	T data
+	vector<TreeNode<T>*> children;
+	TreeNode(T data)
 	{
 		this->data = data;
-		this->next = NULL;
+	}
+}
+void printTree(TreeNode<int>* root)
+{
+	cout<<root->data<<":";
+	for(int i=0;i<root->children.size();i++)
+	{
+		cout<<root->children[i]->data;
+	}
+	for(int i=0;i<root->children.size();i++)
+	{
+		printtree(root->children[i]);
+	}
+
+}
+
+void printTree2(TreeNode<int>* root)
+{
+	queue<TreeNode<int>*> q;
+	q.push(root);
+	while(!q.empty())
+	{
+		for(int i=0;i<root->children.size();i++)
+		{
+			q.push(root->children[i]);
+		}
+		cout<<root->data<<":";
+		for(int i = 0;i<root->children.size();i++)
+		{
+			cout<<root->children[i]->data<<" ,";
+		}
+		cout<<endl;
+		q.pop();
+		root = q.front();
+
 	}
 }
 
-template<typename T>
-class Stack
+TreeNode<int>* takeInput()
 {
-	Node<T> *head;
-	Node<T> *tail;
+	int data;
+	cout<<"Enter data::";
+	cin>>data;
+	TreeNode<int>* root = new TreeNode<int>(data);
 	int size;
-public:
-	Stack()
+	for(int i=0;i<size;i++)
 	{
-		head = NULL;
-		tail = NULL:
+		TreeNode<int>* temp = takeInput();
+		root->children.push(temp);
 	}
-	void push(T data)
-	{
-		Node<T> *n = new Node<T>(data); 
-		if(head == NULL)
-		{
-			head = n;
-			tail = NULL;
-			size++;
+	return root;
 
-		}
-		else
-		{
-			n->next = head;
-			head = n;
-			size++;
-		}
-	}
-
-};
-
-template<typename T>
-class queue
+}
+TreeNode<int>* takeInput2()
 {
-	Node<T> *head;
-	Node<T> *tail;
-	int size;
-public:
-	queue()
+	int data;
+	cout<<"Enter data::";
+	cin>>data;
+	TreeNode<int>* root = new TreeNode<int>(root);
+	queue<TreeNode<int>*> q;
+	q.push(root);
+	while(!q.empty())
 	{
-		head = NULL;
-		tail = NULL;
-		size = 0;
-	}
-
-	void push(T data)
-	{
-		Node<T> *flag = new Node<T>(data);
-		if(head == NULL)
+		int size;
+		cout<<"Enter the number of elements you want to enter in "<<root->data;
+		cin>>size;
+		for(int i=0;i<size;i++)
 		{
-			head = flag;
-			tail = flag;
-			size++;
+			int data;
+			cout<<"Enter the data you want to enter in "<<i<<" th node of "<<root->data;
+			cin>>data;
+			TreeNode<int>* temp = TreeNode<int>(data);
+			root->children.push(temp);
+			q.pop();
+			root = q.front();
 		}
-		else
-		{
-			tail->next = flag;
-			tail = flag;
-			size++;
-		}
-	}
-	void pop()
-	{
-		Node<T> *temp;
-		temp = head;
-		head = head->next;
-		delete temp;
-		size--;
 	}
 }
+ 

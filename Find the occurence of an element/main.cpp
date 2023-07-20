@@ -28,6 +28,7 @@ int main()
    cin>>key;
    for(int i=0;i<n;i++)
    {
+    
        cin>>a[i];
    }
    cout<<NoofTimes(a,n,key);

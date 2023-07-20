@@ -301,9 +301,4 @@ int main()
   {
     printf("%d",copyData[i]);
   }
-
-
-
-
-  
 }
